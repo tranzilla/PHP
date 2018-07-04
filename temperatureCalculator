@@ -1,0 +1,160 @@
+<?php
+//temp4.php
+//define all six equations and set number formation to 2 decimal point
+
+//fahrenheit to celsius
+function F2C($temp_input_value)
+{
+	$celsius=5/9*($temp_input_value-32);
+	$celsius = ''.number_format($celsius, 2);
+	return $celsius;
+}
+//fahrenheit to kelvin
+function F2K($temp_input_value)
+{
+	$kelvin=5/9*($temp_input_value - 32)+273.15;
+	$kelvin = ''.number_format($kelvin, 2);
+	return $kelvin;
+}
+//celsius to fahrenheit
+function C2F($temp_input_value)
+{
+	$fahrenheit= ($temp_input_value*9/5)+32;
+	$fahrenheit = ''.number_format($fahrenheit, 2);
+	return $fahrenheit;
+}
+//celsius to kelvin 
+function C2K($temp_input_value)
+{
+	$kelvin=$temp_input_value+273.15;
+	$kelvin = ''.number_format($kelvin, 2);
+	return $kelvin;
+}
+//Kelvin to fahrenheit equation
+function K2F($temp_input_value)
+{
+	$fahrenheit=9/5*($temp_input_value-273.15)+32;
+	$fahrenheit = ''.number_format($fahrenheit, 2);
+	return $fahrenheit;
+}
+//kelvin to celsius 
+function K2C($temp_input_value)
+{
+	$celsius=$temp_input_value-273.15;
+	$celsius = ''.number_format($celsius, 2);
+	return $celsius;
+}
+?>
+
+<!--Start form in HTML -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Conversion Calculator</title>
+    
+</head>
+
+<body>
+    <h3>Temperature Conversion Calculator</h3>
+    <?php if (!empty($error_message)) { ?>
+        <p class="error"><?php echo htmlspecialchars($error_message); ?></p>
+    <?php } ?>
+    <form action="" method="post">
+	<table>
+		<tr>
+			<td>
+				<select name="inital_degree">
+					<option value="fahrenheit">Fahrenheit</option>
+					<option value="celsius">Celsius</option>
+					<option value="kelvin"> Kelvin</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" name="temp_input_value">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<select name="final_degree">
+					<option value="fahrenheit">Fahrenheit</option>
+					<option value="celsius">Celsius</option>
+					<option value="kelvin">Kelvin</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="submit" name="convert" value="Convert">
+			</td>
+		</tr>
+		<tr> <!-- Set this php script below so the output will show below the drop down lost -->
+			<td>
+				<?php
+				if(isset($_POST['convert']))
+
+				{
+
+					$inital_degree=$_POST['inital_degree'];
+					$final_degree=$_POST['final_degree'];
+					$temp_input_value=$_POST['temp_input_value'];
+
+					//if fahrenheit is selected as 1st temp and celsius as 2nd temp 
+					if ($inital_degree=='fahrenheit') 
+					{
+						if ($final_degree=='celsius') 
+						{
+							$celsius=F2C($temp_input_value);
+							echo "$temp_input_value Fahrenheit = $celsius Celsius";
+						}  elseif ($final_degree=='kelvin') //if fahrenheit is selected as 1st temp and kelvin as 2nd temp 
+						{
+							$kelvin=F2K($temp_input_value);
+							echo "$temp_input_value Fahrenheit = $kelvin Kelvin";
+						}  else //just show what the the value of farenheit
+						{
+							echo "$temp_input_value Fahrenheit";
+						}
+					}
+					
+					//celsius as 1st temp
+					if ($inital_degree=='celsius') 
+					{
+						if ($final_degree=='fahrenheit') 
+						{
+							$fahrenheit=C2F($temp_input_value);
+							echo "$temp_input_value Celsius  = $fahrenheit Fahrenheit";
+						}  elseif ($final_degree=='kelvin') 
+						{
+							$kelvin=C2K($temp_input_value);
+							echo "$temp_input_value Celsius   = $kelvin Kelvin";
+						}  else 
+						{
+							echo "$temp_input_value Celsius";
+						}
+					}
+					
+					//kelvin as 1st temp
+					if ($inital_degree=='kelvin') 
+					{
+						if ($final_degree=='fahrenheit') 
+						{
+							$fahrenheit=K2F($temp_input_value);
+							echo "$temp_input_value Kelvin  = $fahrenheit Fahrenheit";
+						}  elseif ($final_degree=='celsius') 
+						{
+							$celsius=K2C($temp_input_value);
+							echo "$temp_input_value Kelvin  = $celsius Celsius";
+						}  else 
+						{
+							echo "$temp_input_value Kelvin";
+						}
+					} 
+				}
+				?>
+			</td>
+		</tr>
+	</table>
+	</form>
+</body>
+</html>
