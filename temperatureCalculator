@@ -72,7 +72,7 @@ function K2C($temp_input_value)
 		</tr>
 		<tr>
 			<td>
-				<input type="text" name="temp_input_value">
+				<input type="number" name="temp_input_value">
 			</td>
 		</tr>
 		<tr>
