@@ -1,5 +1,5 @@
 <?php
-//temp4.php
+//tempfinal.php
 //define all six equations and set number formation to 2 decimal point
 
 //fahrenheit to celsius
@@ -56,9 +56,6 @@ function K2C($temp_input_value)
 
 <body>
     <h3>Temperature Conversion Calculator</h3>
-    <?php if (!empty($error_message)) { ?>
-        <p class="error"><?php echo htmlspecialchars($error_message); ?></p>
-    <?php } ?>
     <form action="" method="post">
 	<table>
 		<tr>
@@ -72,7 +69,8 @@ function K2C($temp_input_value)
 		</tr>
 		<tr>
 			<td>
-				<input type="number" name="temp_input_value">
+				<input type="text" name="temp_input_value">
+			
 			</td>
 		</tr>
 		<tr>
@@ -95,11 +93,17 @@ function K2C($temp_input_value)
 				if(isset($_POST['convert']))
 
 				{
-
 					$inital_degree=$_POST['inital_degree'];
 					$final_degree=$_POST['final_degree'];
 					$temp_input_value=$_POST['temp_input_value'];
-
+					
+					//number validation - if input is not number, display error message and kill script.
+					if (!is_numeric($temp_input_value))
+					{
+					echo 'Error: You did not enter numbers only. Please enter only numbers.';
+					die();
+					}
+				
 					//if fahrenheit is selected as 1st temp and celsius as 2nd temp 
 					if ($inital_degree=='fahrenheit') 
 					{
@@ -151,6 +155,7 @@ function K2C($temp_input_value)
 						}
 					} 
 				}
+
 				?>
 			</td>
 		</tr>
@@ -158,3 +163,4 @@ function K2C($temp_input_value)
 	</form>
 </body>
 </html>
+
