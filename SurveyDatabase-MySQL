@@ -1,0 +1,66 @@
+SET foreign_key_checks = 0; #turn off constraints temporarily
+
+#since constraints cause problems, drop tables first, working backward
+DROP TABLE IF EXISTS sm18_answers;
+DROP TABLE IF EXISTS sm18_questions;
+DROP TABLE IF EXISTS sm18_surveys;
+  
+#all tables must be of type InnoDB to do transactions, foreign key constraints
+CREATE TABLE sm18_surveys(
+SurveyID INT UNSIGNED NOT NULL AUTO_INCREMENT,
+AdminID INT UNSIGNED DEFAULT 0,
+Title VARCHAR(255) DEFAULT '',
+Description TEXT DEFAULT '',
+DateAdded DATETIME,
+LastUpdated TIMESTAMP DEFAULT 0 ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (SurveyID)
+)ENGINE=INNODB; 
+
+#assigning first survey to AdminID == 1
+INSERT INTO sm18_surveys VALUES (NULL,1,'Our First Survey','Description of Survey',NOW(),NOW()); 
+
+#foreign key field must match size and type, hence SurveyID is INT UNSIGNED
+CREATE TABLE sm18_questions(
+QuestionID INT UNSIGNED NOT NULL AUTO_INCREMENT,
+SurveyID INT UNSIGNED DEFAULT 0,
+Question TEXT DEFAULT '',
+Description TEXT DEFAULT '',
+DateAdded DATETIME,
+LastUpdated TIMESTAMP DEFAULT 0 ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (QuestionID),
+INDEX SurveyID_index(SurveyID),
+FOREIGN KEY (SurveyID) REFERENCES sm18_surveys(SurveyID) ON DELETE CASCADE
+)ENGINE=INNODB;
+
+INSERT INTO sm18_questions VALUES (NULL,1,'Do You Like Our Website?','We really want to know!',NOW(),NOW());
+INSERT INTO sm18_questions VALUES (NULL,1,'Do You Like Cookies?','We like cookies!',NOW(),NOW());
+INSERT INTO sm18_questions VALUES (NULL,1,'Favorite Toppings?','We like chocolate!',NOW(),NOW());
+
+
+#Add additional tables here - Answers Table
+CREATE TABLE sm18_answers(
+AnswerID INT UNSIGNED NOT NULL AUTO_INCREMENT,
+QuestionID INT UNSIGNED DEFAULT 0,
+Answer TEXT DEFAULT '',
+Description TEXT DEFAULT '',
+DateAdded DATETIME,
+LastUpdated TIMESTAMP DEFAULT 0 ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (AnswerID),
+INDEX QuestionID_index(QuestionID),
+FOREIGN KEY (QuestionID) REFERENCES sm18_questions(QuestionID) ON DELETE CASCADE
+)ENGINE=INNODB;
+
+INSERT INTO sm18_answers VALUES (NULL,1,'Yes','',NOW(),NOW());
+INSERT INTO sm18_answers VALUES (NULL,1,'No','',NOW(),NOW());
+INSERT INTO sm18_answers VALUES (NULL,2,'Yes','',NOW(),NOW());
+INSERT INTO sm18_answers VALUES (NULL,2,'No','',NOW(),NOW());
+INSERT INTO sm18_answers VALUES (NULL,2,'Maybe','',NOW(),NOW());
+INSERT INTO sm18_answers VALUES (NULL,3,'Sprinkles','',NOW(),NOW());
+INSERT INTO sm18_answers VALUES (NULL,3,'Almond','',NOW(),NOW());
+INSERT INTO sm18_answers VALUES (NULL,3,'Whipped Creams','',NOW(),NOW());
+
+
+/*
+Add additional table here
+*/
+SET foreign_key_checks = 1; #turn foreign key check back on
