@@ -1,5 +1,4 @@
 <?php //foodtruckitems.php
-
 //--- INITIALIZE VARIABLES ---
 $Total = 0;
 $ItemSubtotal = 0;
@@ -8,28 +7,25 @@ $ExtraSubtotal = 0;
 $TaxRate = .106;
 $Tax = 0;
 $itemsSubtotal = 0; 
-
 // --- ADD ITEMS ---
 $myItem = new Item(1,"Burgers","Eat a Burger!",6.95,0);
 $myItem->addExtra("Bacon");
 $myItem->addExtra("Cheese");
-$myItem->addExtra("Extra Burger Pattie");
+$myItem->addExtra("Avocado");
 $items[] = $myItem;
-
 $myItem = new Item(2,"Fries","Eat more French Fries!",4.95,0);
 $myItem->addExtra("Gravy");
 $myItem->addExtra("Cheese");
-$myItem->addExtra("Baked Beans");
+$myItem->addExtra("Chili");
 $items[] = $myItem;
-
 $myItem = new Item(3,"Shake","Our Villina Shakes are awesome!",5.95,0);
-$myItem->addExtra("More Ice Cream");
+$myItem->addExtra("Whip" );
 $myItem->addExtra("Strawberries");
 $myItem->addExtra("Cherries");
-$myItem->addExtra("Super Size");
-$items[] = $myItem;
 
+$items[] = $myItem;
 // --- BEGIN ITEM CLASS ---
+
 class Item 
 {
     public $ID = 0;
@@ -56,7 +52,6 @@ class Item
 		
     } // --- END ADDEXTRA FUNCTION ---
 }// --- END ITEM CLASS --
-
 //START IF BLOCK 
 if(isset($_POST['submit'])) {   
     foreach($items as $item) {      
@@ -105,7 +100,6 @@ if(isset($_POST['submit'])) {
                 </tr>
         </table>
         ";
-
     $itemsSubtotal += $ExtraSubtotal;
     $Tax = $itemsSubtotal * $TaxRate;
     $Total = $itemsSubtotal + $Tax;
@@ -160,3 +154,4 @@ if(isset($_POST['submit'])) {
     ';
 }
 ?>
+© 2018 GitHub, Inc.
