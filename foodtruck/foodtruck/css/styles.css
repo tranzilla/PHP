@@ -1,0 +1,63 @@
+*{  padding:0;
+    margin:0;
+    box-sizing:border-box;}
+div{
+    width:800px;
+    margin:0 auto;
+    background:rgba(255,255,255,.90);
+    border:solid 4px;
+    margin-top:30px;
+    
+    
+}
+main{width:100%;
+}
+
+table{padding-left:200px;padding-top:40px;padding-bottom:4px;
+font-weight: bold}
+h1{text-align: center;color:red;font-size:60px;text-shadow:black 4px 4px;} 
+h2{text-align: center;margin-top:20px;}
+header{height:160px;background-image:url(../images/fries.jpg);border-bottom:solid 4px;overflow: hidden;
+
+margin:0 auto;}
+body{
+    font-size:100%;
+   
+    line-height:1.5;
+    font-family:verdana,helvetica,sans-serif;
+    background-image:url(../images/burger.jpg);
+    background-attachment: fixed;
+}
+label{
+    display:block;margin-top:6px; margin-bottom:5px;clear:both;font-weight:bold;
+   
+}
+legend{margin:0 auto;font-weight:600;}
+
+form li{
+    list-style-type:none;margin-right:20px;float:left; 
+}
+p{font-weight: bold;}
+tr{padding:5px;}
+th{padding:5px;}
+.order-total{padding-bottom:10px;}
+
+fieldset{
+   
+    padding:10px;}
+
+input[type=text],input[type=email]{
+        width:100%; 
+        margin-bottom:5px;}
+
+input[type=submit]{margin:0 auto;display:block;width:90px;}
+
+#submit {margin-top:10px;
+margin-bottom:10px;}
+
+form ul{margin-left:20px; }
+
+textarea{
+        width:100%; 
+        margin-bottom:9px;
+        height:80px;}
